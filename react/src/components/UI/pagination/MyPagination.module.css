@@ -1,0 +1,21 @@
+.pagination_wrapper {
+    margin-top: 15px;
+    display: flex;
+    gap:10px
+}
+
+.page {
+    padding: 10px;
+    border: 1px solid teal;
+    cursor: pointer;
+    transition: ease-in-out 150ms;
+}
+.page:hover {
+    color: white;
+    background: teal;
+}
+
+.page_current {
+    border: 2px solid teal;
+    font-weight: bold;
+}
