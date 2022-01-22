@@ -14,6 +14,7 @@ import MyPagination from '../components/UI/pagination/MyPagination'
 import PostForm from '../components/PostForm'
 import PostFilter from '../components/PostFilter'
 import PostList from '../components/PostList'
+import MySelect from '../components/UI/select/MySelect'
 
 const Posts = () => {
     const [posts, setPosts] = useState([])
@@ -21,7 +22,7 @@ const Posts = () => {
     const [modal, setModal] = useState(false)
 
     const [totalPages, setTotalPages] = useState(0)
-    const [limit] = useState(10)
+    const [limit, setLimit] = useState(10)
     const [page, setPage] = useState(1)
 
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
@@ -35,7 +36,7 @@ const Posts = () => {
 
     useEffect(() => {
         fetchPosts(limit, page)
-    }, [])
+    }, [limit])
     
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -56,13 +57,23 @@ const Posts = () => {
         <MyModal visible={modal} setVisible={setModal}>
             <PostForm create={createPost}/>
         </MyModal>
+        <MyButton onClick={() => setModal(true)}>
+            Создать пост
+        </MyButton>
         <PostFilter
             filter={filter}
             setFilter={setFilter}
         />
-        <MyButton onClick={() => setModal(true)}>
-            Создать пост
-        </MyButton>
+        <MySelect
+            value={limit}
+            defaultValue={'Кол-во постов'}
+            options={[
+                { value: 5, name: '5' },
+                { value: 10, name: '10' },
+                { value: -1, name: 'Показать все' },
+            ]}
+            onChange={value => setLimit(value)}
+        />
         {postError &&
             <h1>Произошла ошибка {postError}</h1>
         }

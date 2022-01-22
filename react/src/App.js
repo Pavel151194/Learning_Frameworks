@@ -17,11 +17,7 @@ function App() {
   }, [])
 
   return (
-    <AuthContext.Provider value={{
-      isAuth,
-      setIsAuth,
-      isLoading
-    }}>
+    <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading }}>
       <Router>
         <MyNavbar/>
         <AppRouter/>
